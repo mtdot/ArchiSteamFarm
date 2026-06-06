@@ -687,7 +687,7 @@ public sealed class ArchiWebHandler : IDisposable {
 			}
 		}
 
-		string tradeOfferMessage = $"Sent by {SharedInfo.PublicIdentifier}/{SharedInfo.Version}";
+		string tradeOfferMessage = string.Empty;
 
 		if (!string.IsNullOrEmpty(customMessage)) {
 			byte allowedExtraMessageLength = (byte) (MaxTradeOfferMessageLength - tradeOfferMessage.Length - 3); // We're going to add a space, opening and closing bracket
