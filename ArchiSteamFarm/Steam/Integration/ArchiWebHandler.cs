@@ -687,7 +687,7 @@ public sealed class ArchiWebHandler : IDisposable {
 			}
 		}
 
-		string tradeOfferMessage = customMessage ?? $"Sent by {SharedInfo.PublicIdentifier}/{SharedInfo.Version}";
+		string tradeOfferMessage = customMessage ?? string.Empty;
 		tradeOfferMessage = tradeOfferMessage.Length <= MaxTradeOfferMessageLength ? tradeOfferMessage : $"{tradeOfferMessage[..(MaxTradeOfferMessageLength - 1)]}{SteamChatMessage.ContinuationCharacter}";
 
 		Uri request = new(SteamCommunityURL, "/tradeoffer/new/send");
