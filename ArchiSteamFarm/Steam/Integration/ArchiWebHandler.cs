@@ -687,13 +687,8 @@ public sealed class ArchiWebHandler : IDisposable {
 			}
 		}
 
-		string tradeOfferMessage = string.Empty;
-
-		if (!string.IsNullOrEmpty(customMessage)) {
-			byte allowedExtraMessageLength = (byte) (MaxTradeOfferMessageLength - tradeOfferMessage.Length - 3); // We're going to add a space, opening and closing bracket
-
-			tradeOfferMessage += $" ({(customMessage.Length <= allowedExtraMessageLength ? customMessage : $"{customMessage[..(allowedExtraMessageLength - 1)]}{SteamChatMessage.ContinuationCharacter}")})";
-		}
+		string tradeOfferMessage = customMessage ?? $"Sent by {SharedInfo.PublicIdentifier}/{SharedInfo.Version}";
+		tradeOfferMessage = tradeOfferMessage.Length <= MaxTradeOfferMessageLength ? tradeOfferMessage : $"{tradeOfferMessage[..(MaxTradeOfferMessageLength - 1)]}{SteamChatMessage.ContinuationCharacter}";
 
 		Uri request = new(SteamCommunityURL, "/tradeoffer/new/send");
 		Uri referer = new(SteamCommunityURL, "/tradeoffer/new");
